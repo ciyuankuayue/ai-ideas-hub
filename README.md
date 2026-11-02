@@ -125,6 +125,8 @@
 }
 ```
 
+如果想让别人更容易接手，建议在节点里补一个 `proposal` 对象（核心假设 / 新颖性查重 / 可行性 / 路线图），比自由文本更容易被认领——结构见下方[字段速查](#字段速查)。
+
 字段含义、状态枚举、连线规则见下面的[字段速查](#字段速查)和 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
 
 ### C. 深入参与：clone 到本地
@@ -163,6 +165,7 @@ python -m http.server 8000
 | `status` | 是 | 见下方状态枚举 |
 | `summary` | 是 | 一句话摘要，图谱和卡片上显示 |
 | `thought` | 是 | 原文：动机、想解决的问题、你的判断 |
+| `proposal` | 否 | 可选「微型提案」：把想法拆成 4 项便于他人认领——`hypothesis`(核心假设) / `novelty`(新颖性·查重) / `feasibility`(可行性) / `roadmap`(路线图)。**填了更容易被认领** |
 | `research` | 否 | 已查到的研究，元素为 `{ title, url, note }` |
 | `chain.inspiredBy` | 否 | 上游：这个想法从哪些节点来的，填它们的 `id` |
 | `chain.leadsTo` | 否 | 下游：这个想法催生了哪些节点，填它们的 `id` |
@@ -187,6 +190,25 @@ python -m http.server 8000
 - `research` → 连到论文 / 项目节点（紫色）。
 
 只填你确定的关系，不确定就留空数组——留空不会报错，也不会画出奇怪的线。
+
+---
+
+## 与已有工作的区别
+
+建这个仓库前，我先查证了类似的东西是否有人做过——这也正是本仓库「先查证再记录」的初衷。结论：图谱工具有人做，公开想法仓库有人做，但把两者用一套**带语义的 schema** 结合起来、并且让「已查研究」和「想法状态」成为一等公民的，是空的。
+
+| 项目 | 它是什么 | 和我们像在哪 | 关键差别 |
+|---|---|---|---|
+| **Quartz** | Obsidian/Markdown → 静态站，自带交互图谱、反链、全文搜索 | 数据文件 + 前端渲染 + Pages 托管，技术路径几乎一样 | 关系是 wikilink（"提到"），没有方向性的 `inspiredBy`/`leadsTo`；没有专门的 `research` 字段，你的判断和别人论文混在一起；没有 `status` 生命周期 |
+| **VLN-Research-Quest** | 公开研究想法清单，Markdown「微型提案」，fork+PR 认领 | 公开想法 + PR 参与 + 被认领 + 要求署名 | 没有图谱、没有想法间演化链、没有状态流转，浏览靠翻文件夹 |
+| **rags-lab** | papers/frameworks/ideas/discussions 分层，用 PR 讨论代替 Issue | 公开想法 + 协作 | 无可视化 |
+| **Open Ideas Hub** | 一个想法一个文件夹 + `idea.md`，PR 提交 | 公开想法 + PR | 无可视化 |
+| **Foam / Obsidian Publish** | VS Code + GitHub 的笔记图谱 / 付费发布 | 笔记图谱 | 个人笔记工具，不邀请陌生人参与；关系仍是 wikilink |
+| **project-graph / Ideon / IdeaMesh** | 图形化整理思路的桌面/画布工具 | 图谱形态 | "自己用"的工具，不是公开邀请协作的仓库 |
+
+**为什么不直接用 Quartz**：如果目标只是"漂亮的笔记图谱"，Quartz 更省力。但本仓库的价值在 schema 不在渲染——`research` 把"我查过"和"别人结论"强制分开，`inspiredBy`/`leadsTo` 是语义化因果而非"提到"，`status` 让"哪些被证伪了"可见。这些 Quartz 都没有。选自写零依赖视图，是为了 schema 完全可控、fork 后零配置即可用。
+
+**空位不等于需求**：也可能大多数人不需要"显式因果链"这种约束，写笔记时手一松就退化成 wikilink。这点我清楚，所以把约束写进 schema 和 README，靠约定守住。
 
 ---
 
