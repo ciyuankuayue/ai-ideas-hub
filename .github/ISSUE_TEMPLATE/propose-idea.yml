@@ -1,0 +1,43 @@
+name: 提议新想法
+description: 提出一个 AI 相关的想法，由仓库主人转成图谱节点
+title: "[想法] "
+labels: ["idea"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: 想法标题
+      placeholder: 一句话说清这个想法
+    validations:
+      required: true
+  - type: textarea
+    id: thought
+    attributes:
+      label: 我的想法
+      description: 写清楚动机、想解决的问题、大致思路
+    validations:
+      required: true
+  - type: input
+    id: tags
+    attributes:
+      label: 标签（逗号分隔）
+      placeholder: AI, 检索, 对齐
+  - type: dropdown
+    id: status
+    attributes:
+      label: 状态
+      options:
+        - raw
+        - exploring
+        - hasResearch
+        - wip
+        - dormant
+  - type: textarea
+    id: research
+    attributes:
+      label: 已知的现有研究（可选）
+      description: 贴论文/项目链接和一句话关系，每行一个
+  - type: textarea
+    id: questions
+    attributes:
+      label: 开放问题 / 想邀请别人一起想的（可选）

@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "title": "AI 想法图谱",
+    "description": "记录我对 AI 的想法、已查到的相关研究，以及想法之间的演化链。欢迎通过 Issue / PR 参与。",
+    "repo": "ciyuankuayue/ai-ideas-hub"
+  },
+  "ideas": [
+    {
+      "id": "idea-001",
+      "title": "用向量库做想法的自动关联",
+      "tags": ["AI", "检索", "知识管理"],
+      "status": "has-research",
+      "summary": "把每个想法嵌成向量，写入时自动提示相似/冲突的想法。",
+      "thought": "我有大量零散 AI 想法，手动归类太累。如果把每个想法用 embedding 表示、存进向量库，就能在写入时自动提示『这个想法和 idea-003 很像』，甚至标出相互矛盾的想法。",
+      "research": [
+        { "title": "MTEB: 嵌入模型大规模基准", "url": "https://arxiv.org/abs/2210.07316", "note": "衡量 embedding 质量，选型时参考" },
+        { "title": "HyDE 假设性文档嵌入", "url": "https://arxiv.org/abs/2212.10496", "note": "用生成式假设提升检索，可借鉴到想法检索" }
+      ],
+      "chain": {
+        "inspiredBy": ["idea-003"],
+        "leadsTo": ["idea-002"],
+        "openQuestions": [
+          "想法粒度怎么定？一句 vs 一段？",
+          "冲突检测（反义想法）怎么做？"
+        ]
+      }
+    },
+    {
+      "id": "idea-002",
+      "title": "想法演化图谱（本仓库）",
+      "tags": ["AI", "可视化", "协作"],
+      "status": "wip",
+      "summary": "把想法、研究、演化关系画成可交互图谱，吸引别人协作。",
+      "thought": "光记录不够，要让别人一眼看懂我的思维链并参与。于是有了这个仓库：想法是节点，inspiredBy / leadsTo 是边，research 连到论文。零克隆就能看、网页端改文件就能扩展。",
+      "research": [
+        { "title": "知识图谱构建综述", "url": "https://arxiv.org/abs/2003.02320", "note": "节点-边建模思路参考" }
+      ],
+      "chain": {
+        "inspiredBy": ["idea-001"],
+        "leadsTo": [],
+        "openQuestions": [
+          "图谱交互怎么降低首次访问门槛？",
+          "怎么激励陌生人提 PR？"
+        ]
+      }
+    },
+    {
+      "id": "idea-003",
+      "title": "让模型显式输出自己的不确定性",
+      "tags": ["AI", "对齐", "可信"],
+      "status": "exploring",
+      "summary": "模型回答时附带『我有多确定』的信号，并区分盲区与推理不确定。",
+      "thought": "很多 AI 回答很自信但会错。能不能在输出里显式带置信度，并区分『知识盲区』和『推理不确定』两种来源？",
+      "research": [
+        { "title": "Language Models (Mostly) Know What They Know", "url": "https://arxiv.org/abs/2009.03300", "note": "自我知识 / 置信度早期研究" }
+      ],
+      "chain": {
+        "inspiredBy": [],
+        "leadsTo": ["idea-001"],
+        "openQuestions": [
+          "置信度校准和任务难度怎么解耦？"
+        ]
+      }
+    }
+  ]
+}

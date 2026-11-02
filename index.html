@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 想法图谱</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark"></span>
+      <div>
+        <div class="brand-title" id="siteTitle">AI 想法图谱</div>
+        <div class="brand-sub" id="siteDesc">记录想法 · 串联研究 · 邀请协作</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <input id="search" class="search" type="text" placeholder="搜索想法、标签、研究…" autocomplete="off" />
+      <div class="view-toggle">
+        <button id="btnGraph" class="toggle active" data-view="graph">图谱</button>
+        <button id="btnCards" class="toggle" data-view="cards">卡片</button>
+      </div>
+      <a id="btnNewIdea" class="btn-primary" href="#" target="_blank" rel="noopener">提议新想法</a>
+    </div>
+  </header>
+
+  <div id="filterBar" class="filter-bar"></div>
+
+  <main class="stage">
+    <section id="graphView" class="graph-view">
+      <canvas id="graph"></canvas>
+      <div class="legend">
+        <div><span class="dot dot-idea"></span>想法</div>
+        <div><span class="dot dot-research"></span>现有研究</div>
+        <div><span class="line line-inspire"></span>inspiredBy 上游</div>
+        <div><span class="line line-lead"></span>leadsTo 下游</div>
+        <div class="hint">滚轮缩放 · 拖拽空白平移 · 拖节点重排 · 点节点看详情</div>
+      </div>
+    </section>
+
+    <section id="cardsView" class="cards-view hidden"></section>
+
+    <aside id="detail" class="detail hidden">
+      <button id="detailClose" class="detail-close" aria-label="关闭">×</button>
+      <div id="detailBody"></div>
+    </aside>
+  </main>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
