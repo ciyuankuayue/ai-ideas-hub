@@ -175,4 +175,12 @@ html, body {
 .detail .sub-link { color: var(--accent); text-decoration: none; }
 .detail .sub-link:hover { text-decoration: underline; }
 
+.detail .prop-row { margin-bottom: 10px; }
+.detail .prop-key {
+  display: inline-block; font-size: 11px; letter-spacing: .3px;
+  color: var(--amber); border: 1px solid #5a4a2a; border-radius: 5px;
+  padding: 1px 8px; margin-bottom: 4px;
+}
+.detail .prop-row p { margin: 2px 0 0; color: var(--text); }
+
 .hidden { display: none; }
