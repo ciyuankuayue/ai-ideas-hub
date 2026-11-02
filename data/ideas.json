@@ -9,9 +9,15 @@
       "id": "idea-001",
       "title": "用向量库做想法的自动关联",
       "tags": ["AI", "检索", "知识管理"],
-      "status": "has-research",
+      "status": "hasResearch",
       "summary": "把每个想法嵌成向量，写入时自动提示相似/冲突的想法。",
       "thought": "我有大量零散 AI 想法，手动归类太累。如果把每个想法用 embedding 表示、存进向量库，就能在写入时自动提示『这个想法和 idea-003 很像』，甚至标出相互矛盾的想法。",
+      "proposal": {
+        "hypothesis": "把每个想法嵌入成向量并入库，写入时按相似度自动提示相关/冲突想法，能让零散想法自组织，减少人工归类成本。",
+        "novelty": "向量检索与 HyDE 已有成熟工作；新意在于把『想法』作为检索对象，并显式标记冲突而非仅召回相似。",
+        "feasibility": "技术上可行（embedding + 向量库即可）；难点在粒度定义与冲突检测的语义判据。",
+        "roadmap": "① 选 embedding 模型并定想法粒度 → ② 入库 + 相似召回 → ③ 用 LLM 辅助判定冲突 → ④ 接入本仓库实时提示。"
+      },
       "research": [
         { "title": "MTEB: 嵌入模型大规模基准", "url": "https://arxiv.org/abs/2210.07316", "note": "衡量 embedding 质量，选型时参考" },
         { "title": "HyDE 假设性文档嵌入", "url": "https://arxiv.org/abs/2212.10496", "note": "用生成式假设提升检索，可借鉴到想法检索" }
@@ -32,6 +38,12 @@
       "status": "wip",
       "summary": "把想法、研究、演化关系画成可交互图谱，吸引别人协作。",
       "thought": "光记录不够，要让别人一眼看懂我的思维链并参与。于是有了这个仓库：想法是节点，inspiredBy / leadsTo 是边，research 连到论文。零克隆就能看、网页端改文件就能扩展。",
+      "proposal": {
+        "hypothesis": "把想法/研究/演化关系做成零克隆可交互图谱，比纯文本 README 更能让人一眼看懂思维链并参与。",
+        "novelty": "理念上接近 digital garden；差异在显式 research 字段与 inspiredBy/leadsTo 语义边。",
+        "feasibility": "已验证：零依赖 canvas 力导向图 + Pages 托管已跑通。",
+        "roadmap": "补 proposal 字段 → 接半自动论文抓取 → 增加聚类布局。"
+      },
       "research": [
         { "title": "知识图谱构建综述", "url": "https://arxiv.org/abs/2003.02320", "note": "节点-边建模思路参考" }
       ],
@@ -51,6 +63,12 @@
       "status": "exploring",
       "summary": "模型回答时附带『我有多确定』的信号，并区分盲区与推理不确定。",
       "thought": "很多 AI 回答很自信但会错。能不能在输出里显式带置信度，并区分『知识盲区』和『推理不确定』两种来源？",
+      "proposal": {
+        "hypothesis": "模型在输出时附带『我有多确定』的信号，并区分『知识盲区』与『推理不确定』两类来源，可提升可信度。",
+        "novelty": "自我知识与置信度校准已有早期研究（如 2009.03300）；差异在显式区分不确定性来源类型。",
+        "feasibility": "中：校准与任务难度耦合，区分两类来源需要可解释的标注训练。",
+        "roadmap": "① 定义两类不确定性的标注规范 → ② 小模型微调校准 → ③ 在对话场景评测用户信任变化。"
+      },
       "research": [
         { "title": "Language Models (Mostly) Know What They Know", "url": "https://arxiv.org/abs/2009.03300", "note": "自我知识 / 置信度早期研究" }
       ],
