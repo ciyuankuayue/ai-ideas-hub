@@ -323,11 +323,29 @@
       return "<div class='open-q'>· " + esc(q) + "</div>";
     }).join("");
 
+    var proposal = idea.proposal;
+    var proposalHtml = "";
+    if (proposal) {
+      var pItems = [
+        ["核心假设", proposal.hypothesis],
+        ["新颖性 / 查重", proposal.novelty],
+        ["可行性", proposal.feasibility],
+        ["路线图", proposal.roadmap]
+      ].filter(function (it) { return it[1]; });
+      if (pItems.length) {
+        proposalHtml = '<div class="section"><div class="section-title">微型提案（想认领就填）</div>' +
+          pItems.map(function (it) {
+            return '<div class="prop-row"><span class="prop-key">' + esc(it[0]) + '</span><p>' + esc(it[1]) + "</p></div>";
+          }).join("") + "</div>";
+      }
+    }
+
     document.getElementById("detailBody").innerHTML =
       '<span class="status ' + sc + '">' + sl + "</span>" +
       "<h2>" + esc(idea.title) + "</h2>" +
       '<div class="tags" style="margin-bottom:12px">' + tags + "</div>" +
       '<div class="section"><div class="section-title">我的想法</div><p>' + esc(idea.thought || idea.summary || "") + "</p></div>" +
+      proposalHtml +
       (research ? '<div class="section"><div class="section-title">已查到的相关研究</div>' + research + "</div>" : "") +
       (ib ? '<div class="section"><div class="section-title">受这些启发（inspiredBy）</div><div>' + ib + "</div></div>" : "") +
       (lt ? '<div class="section"><div class="section-title">衍生出（leadsTo）</div><div>' + lt + "</div></div>" : "") +
